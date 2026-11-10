@@ -1,0 +1,67 @@
+{
+  "elf": [
+    {
+      "path": "odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl",
+      "input_sha256": "870fbf0ff397c1b2f33db0ad61b90e2a8031ed57bb7921faa751acfcde8284f9",
+      "current_sha256": "bb5b7e93b88a0493a18ab00f6862ee33ea83401fdbb9852200d7a37e93358d0f",
+      "section_sha256": {
+        ".text": {
+          "before": "af9935db9b08b8b4d529dc93082a5fb7535ecd40d15f610a210bf296295aa3d8",
+          "after": "ff8ab23979f863adcbaf75030828e01af75e47a42e3d16d4401953ebc1e034dd"
+        },
+        ".rodata": {
+          "before": "e3cb4bafa20022e49e7c83c8a527f692e8a635c9204d92432d3b56ed019c39e3",
+          "after": "e3cb4bafa20022e49e7c83c8a527f692e8a635c9204d92432d3b56ed019c39e3"
+        }
+      },
+      "patches": [
+        {
+          "va": "0x152bec",
+          "old": "c9f5ffb021edc23d",
+          "new": "2104004f2154604f"
+        }
+      ]
+    },
+    {
+      "path": "vendor/bin/hw/android.hardware.powerstats-service.qti",
+      "input_sha256": "ffa39ca2d0f698dd3a0dc276f5d2467015663162fa42a9c29631f68221be167e",
+      "current_sha256": "e2e3fc6ea0b038f7c6a386eddc11b3c34cbbbc9ab55d9145013bd81953396b6c",
+      "section_sha256": {
+        ".text": {
+          "before": "407bef2c6d76154da3f9f678eda1d61fadad1e5c3d9b4b57bc85fad37ee1b966",
+          "after": "5ab80e4b6dc7f6d2957def269ae7a66591a92cd0051de6d3ef01ce583069ac41"
+        },
+        ".rodata": {
+          "before": "b4288cb95ff3c5fbd476eaed1271c49345adc0fd53548ba54818d5deac6b98e2",
+          "after": "b4288cb95ff3c5fbd476eaed1271c49345adc0fd53548ba54818d5deac6b98e2"
+        }
+      },
+      "patches": [
+        {
+          "va": "0xfe60",
+          "old": "08653791",
+          "new": "08013b91"
+        },
+        {
+          "va": "0xfed8",
+          "old": "e7643791",
+          "new": "e7003b91"
+        }
+      ]
+    }
+  ],
+  "files": {
+    "vendor/bin/init.kernel.post_boot-canoe_default_6_2.sh": {
+      "before": "8c10130097fc6b374a3978d6d3c588ebe3fef37aa78fdf42f6d9b3ac4b675328",
+      "after": "6fb57857cfbb13695f8843ac0656855c8d9f3ad3daffc09af9bc45397ac06f68"
+    },
+    "vendor/etc/perf/perfboostselection.xml": {
+      "before": "3eb1b3baa0bd26ed80b6329873e587da19128f004c187f05d78191a8102d8d5f",
+      "after": "056a7ce2778a22d85cc51aa770e0c1f390e4c523da36dacf5ae64fd35a1e4f54"
+    },
+    "vendor/etc/perf/qapeboostsconfig.xml": {
+      "before": "ce5155437983a5520e9ce1179c6f0f8ab3d1159f472cb652cf1ca012f6a833bc",
+      "after": "254ca7f52bae066d9a9cdb9b32c2ed11e9bafc8fd467af1dbe38549ae6ef6244"
+    }
+  }
+}

@@ -1,57 +1,36 @@
-/*
- * SPDX-FileCopyrightText: The LineageOS Project
- * SPDX-License-Identifier: Apache-2.0
- */
-
 package com.xiaomi.settings.touch
 
 import android.os.IBinder
 import android.os.ServiceManager
-import android.util.Log
 import vendor.xiaomi.hw.touchfeature.ITouchFeature
 
 object TouchFeatureWrapper {
-
-    private const val TAG = "TouchFeatureWrapper"
-    private val DEBUG = Log.isLoggable(TAG, Log.DEBUG)
-
     @Volatile private var touchFeature: ITouchFeature? = null
-
-    private val deathRecipient =
-        IBinder.DeathRecipient {
-            if (DEBUG) Log.d(TAG, "serviceDied")
-            touchFeature = null
-        }
+    private val deathRecipient = IBinder.DeathRecipient { touchFeature = null }
 
     @Synchronized
-    private fun getTouchFeature(): ITouchFeature? =
-        touchFeature
-            ?: runCatching {
-                val fqName = "${ITouchFeature.DESCRIPTOR}/default"
-                val binder =
-                    android.os.Binder.allowBlocking(
-                        ServiceManager.waitForDeclaredService(fqName)
-                    )
-                ITouchFeature.Stub.asInterface(binder).apply {
-                    asBinder().linkToDeath(deathRecipient, 0)
-                }
-            }
-            .onSuccess { touchFeature = it }
-            .onFailure { e -> Log.e(TAG, "getTouchFeature failed!", e) }
-            .getOrNull()
+    private fun getTouchFeature(): ITouchFeature {
+        touchFeature?.let { return it }
+        val name = "${ITouchFeature.DESCRIPTOR}/default"
+        val binder = ServiceManager.checkService(name)
+            ?: error("Touch HAL is not registered")
+        val service = checkNotNull(ITouchFeature.Stub.asInterface(binder))
+        binder.linkToDeath(deathRecipient, 0)
+        touchFeature = service
+        return service
+    }
 
-    fun isServiceAvailable(): Boolean =
-        ServiceManager.isDeclared("${ITouchFeature.DESCRIPTOR}/default")
+    fun getReportRate(): Boolean {
+        val service = getTouchFeature()
+        val active = service.getModeCurValue(0, 202)
+        check(active in 0..1) {
+            "Touch report-rate state is unavailable: $active"
+        }
+        return active == 1
+    }
 
     fun setModeValue(type: Int, mode: Int, value: Int) {
-        val tf =
-            getTouchFeature()
-                ?: run {
-                    Log.e(TAG, "touchFeature is null!")
-                    return
-                }
-        if (DEBUG) Log.d(TAG, "setModeValue: type=$type, mode=$mode, value=$value")
-        runCatching { tf.setModeValue(type, mode, value) }
-            .onFailure { e -> Log.e(TAG, "setModeValue failed!", e) }
+        val result = getTouchFeature().setModeValue(type, mode, value)
+        check(result == 0) { "Touch HAL mode $mode failed: $result" }
     }
 }

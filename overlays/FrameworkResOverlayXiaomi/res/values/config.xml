@@ -24,15 +24,6 @@
      entries do not follow the convention, but all new entries should. -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Type of the double tap sensor. Empty if double tap is not supported. -->
-    <string name="config_dozeDoubleTapSensorType">org.lineageos.sensor.double_tap</string>
-
-    <!-- Type of the tap sensor. Empty if tap is not supported. -->
-    <string name="config_dozeTapSensorType" translatable="false">org.lineageos.sensor.single_tap</string>
-
-    <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
-    <string name="config_dozeUdfpsLongPressSensorType" translatable="false">org.lineageos.sensor.udfps</string>
-
     <!-- Allow automatic adjusting of the screen brightness while dozing in low power state. -->
     <bool name="config_allowAutoBrightnessWhileDozing">true</bool>
 
@@ -437,11 +428,4 @@
 
     <!-- Specifies the maximum burn-in offset vertically. -->
     <integer name="config_burnInProtectionMaxVerticalOffset">40</integer>
-
-    <!-- Whether to enable fp unlock when screen turns off on udfps devices -->
-    <bool name="config_screen_off_udfps_enabled">true</bool>
-
-    <!-- Default value for fp screen off unlock toggle, it only works for the devices that support
-         fp screen off unlock-->
-    <bool name="config_screen_off_udfps_default_on">false</bool>
 </resources>

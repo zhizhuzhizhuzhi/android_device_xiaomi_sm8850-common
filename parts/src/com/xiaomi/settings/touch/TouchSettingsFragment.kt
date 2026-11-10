@@ -6,6 +6,7 @@
 package com.xiaomi.settings.touch
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import android.os.UserHandle
 import android.provider.Settings
 import android.util.Log
@@ -30,16 +31,15 @@ class TouchSettingsFragment :
         if (DEBUG) Log.d(TAG, "onCreatePreferences")
         setPreferencesFromResource(R.xml.settings_touch, rootKey)
 
-        val isEnabled =
-            Settings.System.getIntForUser(
-                requireContext().contentResolver,
-                TouchReportRateService.SETTING_KEY,
-                0,
-                UserHandle.USER_CURRENT,
-            ) == 1
-
-        switchBar.isChecked = isEnabled
-        switchBar.isEnabled = TouchReportRateService.isReportRateWritable()
+        switchBar.isEnabled = false
+        TouchReportRateService.readReportRate { result ->
+            if (!isAdded) return@readReportRate
+            switchBar.isEnabled = result.isSuccess
+            result.fold({ switchBar.isChecked = it; switchBar.summary = null }, {
+                switchBar.summary = it.message
+                showError(it)
+            })
+        }
         switchBar.onPreferenceChangeListener = this
     }
 
@@ -47,13 +47,22 @@ class TouchSettingsFragment :
         if (preference == switchBar) {
             val isChecked = newValue as Boolean
             if (DEBUG) Log.d(TAG, "onPreferenceChange: $isChecked")
-            Settings.System.putIntForUser(
-                requireContext().contentResolver,
-                TouchReportRateService.SETTING_KEY,
-                if (isChecked) 1 else 0,
-                UserHandle.USER_CURRENT,
-            )
+            val resolver = requireContext().applicationContext.contentResolver
+            switchBar.isEnabled = false
+            TouchReportRateService.setReportRate(resolver, if (isChecked) 1 else 0) { result ->
+                if (!isAdded) return@setReportRate
+                switchBar.isEnabled = true
+                result.fold({ switchBar.isChecked = isChecked }, { showError(it) })
+            }
+            return false
         }
         return true
+    }
+
+    private fun showError(error: Throwable) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(android.R.string.dialog_alert_title)
+            .setMessage(error.message ?: error.javaClass.simpleName)
+            .setPositiveButton(android.R.string.ok, null).show()
     }
 }

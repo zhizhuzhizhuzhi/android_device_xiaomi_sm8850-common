@@ -8,6 +8,7 @@ package com.xiaomi.settings.touch
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.IntentFilter
 import android.database.ContentObserver
@@ -17,6 +18,7 @@ import android.os.Looper
 import android.os.UserHandle
 import android.provider.Settings
 import android.util.Log
+import java.util.concurrent.Executors
 
 class TouchReportRateService : Service() {
 
@@ -78,19 +80,41 @@ class TouchReportRateService : Service() {
 
         private const val MODE_GAME_MODE = 0
         private const val MODE_ACTIVE_MODE = 202
+        private val worker = Executors.newSingleThreadExecutor()
+        private val main = Handler(Looper.getMainLooper())
 
-        fun isReportRateWritable(): Boolean = TouchFeatureWrapper.isServiceAvailable()
+        private fun <T> execute(callback: (Result<T>) -> Unit, operation: () -> T) {
+            worker.execute {
+                val result = runCatching(operation)
+                result.exceptionOrNull()?.let { Log.e(TAG, "Touch report-rate operation failed", it) }
+                main.post { callback(result) }
+            }
+        }
+
+        fun readReportRate(callback: (Result<Boolean>) -> Unit) = execute(callback) {
+            TouchFeatureWrapper.getReportRate()
+        }
+
+        fun setReportRate(resolver: ContentResolver, value: Int, callback: (Result<Unit>) -> Unit) =
+            execute(callback) {
+                applyHardware(value)
+                check(Settings.System.putIntForUser(resolver, SETTING_KEY, value,
+                    UserHandle.USER_CURRENT)) { "Touch mode applied, but preference persistence failed" }
+            }
 
         fun applyReportRate(context: Context) {
-            val value =
-                Settings.System.getIntForUser(
-                    context.contentResolver,
-                    SETTING_KEY,
-                    DEFAULT_VALUE,
-                    UserHandle.USER_CURRENT,
-                )
-            if (DEBUG) Log.d(TAG, "applyReportRate: $value")
+            val resolver = context.applicationContext.contentResolver
+            execute({}) {
+                // Read inside the same executor as UI writes, so queued events cannot
+                // replay a stale preference after a newer successful user operation.
+                val value = Settings.System.getIntForUser(resolver, SETTING_KEY,
+                    DEFAULT_VALUE, UserHandle.USER_CURRENT)
+                applyHardware(value)
+            }
+        }
 
+        private fun applyHardware(value: Int) {
+            require(value == 0 || value == 1) { "Invalid touch report-rate setting: $value" }
             if (value == 1) {
                 TouchFeatureWrapper.setModeValue(TOUCH_ID, MODE_GAME_MODE, 1)
                 TouchFeatureWrapper.setModeValue(TOUCH_ID, MODE_ACTIVE_MODE, 1)

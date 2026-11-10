@@ -7,3 +7,16 @@ binder_call(system_server, hal_touchfeature_xiaomi_default)
 
 allow system_server hal_touchfeature_xiaomi_default:process signal;
 allow system_server vendor_sysfs_eud_extcon:file r_file_perms;
+# Android17 splits platform_app_36; retain Adreno public HAL client paths.
+hal_client_domain(platform_app_36, vendor_hal_qspmhal)
+hal_client_domain(platform_app_36, vendor_hal_unsignedhexlp)
+hal_client_domain(platform_app, vendor_hal_unsignedhexlp)
+
+# Original camera workload scheduler reads PSI, without any writes.
+allow platform_app_36 { proc_pressure_mem proc_pressure_cpu proc_pressure_io }:file r_file_perms;
+
+
+# Native AOSPA DC dimming uses stock DisplayFeature, with read-only panel verification.
+hal_client_domain(system_server, vendor_hal_displayfeature_xiaomi)
+allow system_server vendor_sysfs_displayfeature:dir search;
+allow system_server vendor_sysfs_displayfeature:file r_file_perms;

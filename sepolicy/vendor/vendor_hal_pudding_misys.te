@@ -1,0 +1,47 @@
+# Factory MiSys file operations, isolated from unrelated HypSys modules.
+hal_attribute(pudding_misys)
+type vendor_hal_pudding_misys_default, domain;
+type vendor_hal_pudding_misys_default_exec, exec_type, vendor_file_type, file_type;
+type vendor_hal_pudding_misys_service, hal_service_type, protected_service, service_manager_type;
+init_daemon_domain(vendor_hal_pudding_misys_default)
+hal_server_domain(vendor_hal_pudding_misys_default, hal_pudding_misys)
+hal_attribute_service(hal_pudding_misys, vendor_hal_pudding_misys_service)
+binder_use(vendor_hal_pudding_misys_default)
+hal_client_domain(platform_app_36, hal_pudding_misys)
+allow vendor_hal_pudding_misys_default mnt_vendor_file:dir search;
+allow vendor_hal_pudding_misys_default camera_persist_file:dir create_dir_perms;
+allow vendor_hal_pudding_misys_default camera_persist_file:file create_file_perms;
+allow vendor_hal_pudding_misys_default camera_persist_file:lnk_file r_file_perms;
+
+# Original MiSys calls its privileged Core helper for chmod. Limit it to the
+# camera persistence type; raw partitions and other persist directories stay denied.
+type vendor_hal_pudding_misys_core, domain;
+type vendor_hal_pudding_misys_core_exec, exec_type, vendor_file_type, file_type;
+type vendor_hal_pudding_misys_core_service, hal_service_type, protected_service, service_manager_type;
+init_daemon_domain(vendor_hal_pudding_misys_core)
+hal_server_domain(vendor_hal_pudding_misys_core, hal_pudding_misys)
+binder_use(vendor_hal_pudding_misys_core)
+add_service(vendor_hal_pudding_misys_core, vendor_hal_pudding_misys_core_service)
+allow vendor_hal_pudding_misys_default vendor_hal_pudding_misys_core_service:service_manager find;
+binder_call(vendor_hal_pudding_misys_default, vendor_hal_pudding_misys_core)
+allow vendor_hal_pudding_misys_core mnt_vendor_file:dir search;
+allow vendor_hal_pudding_misys_core camera_persist_file:dir { getattr search setattr };
+allow vendor_hal_pudding_misys_core camera_persist_file:file { getattr setattr };
+allow vendor_hal_pudding_misys_core self:capability fowner;
+
+# Camera is a real HAL client; service lookup alone does not grant Binder calls.
+binder_call(hal_pudding_misys_client, vendor_hal_pudding_misys_default)
+
+# Camera passes its SharedMemory fd into the original MiSys read API.
+allow vendor_hal_pudding_misys_default hal_pudding_misys_client:fd use;
+
+# Original camera LUT/watermark files live in vendor camera data, separate from persist.
+allow vendor_hal_pudding_misys_default vendor_camera_data_file:dir create_dir_perms;
+allow vendor_hal_pudding_misys_default vendor_camera_data_file:file create_file_perms;
+allow vendor_hal_pudding_misys_default vendor_camera_data_file:lnk_file r_file_perms;
+allow vendor_hal_pudding_misys_core vendor_camera_data_file:dir { getattr search setattr };
+allow vendor_hal_pudding_misys_core vendor_camera_data_file:file { getattr setattr };
+
+# Stock camera passes legacy ashmem FDs for LUT/watermark transfer.
+# Access is through the received FD; no path open or app data directory access.
+allow vendor_hal_pudding_misys_default appdomain_tmpfs:file { getattr read write map };

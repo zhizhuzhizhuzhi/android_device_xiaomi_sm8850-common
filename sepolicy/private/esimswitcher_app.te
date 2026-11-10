@@ -13,3 +13,7 @@ allow esimswitcher_app voiceinteraction_service:service_manager find;
 allow esimswitcher_app system_app_data_file:dir create_dir_perms;
 allow esimswitcher_app system_app_data_file:file create_file_perms;
 allow esimswitcher_app system_app_data_file:lnk_file create_file_perms;
+# GPU configuration and Xiaomi performance client used during app startup.
+allow esimswitcher_app gpu_service:service_manager find;
+allow esimswitcher_app vendor_perf_service:service_manager find;
+binder_call(esimswitcher_app, vendor_perfservice)

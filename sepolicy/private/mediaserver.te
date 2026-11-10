@@ -1,0 +1,3 @@
+
+# GPP is a platform-private Qualcomm property; keep its consumer rule with its owner.
+get_prop(mediaserver, vendor_sys_gpp_prop)

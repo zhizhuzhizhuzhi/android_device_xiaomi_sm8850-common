@@ -14,3 +14,13 @@ allow vendor_hal_perf_default vendor_hal_poweroptservice_qti:dir search;
 allow vendor_hal_perf_default vendor_hal_poweroptservice_qti:file r_file_perms;
 allow vendor_hal_perf_default vendor_shsusrd:dir search;
 allow vendor_hal_perf_default vendor_shsusrd:file r_file_perms;
+# Video-codec task metadata is needed by the existing Perf task-profile path.
+allow vendor_hal_perf_default mediacodec:dir search;
+allow vendor_hal_perf_default mediacodec:file r_file_perms;
+
+# Factory Perf HAL enumerates mounted F2FS storage for resource-node discovery.
+allow vendor_hal_perf_default sysfs_fs_f2fs:dir { open read search };
+
+# Read the factory F2FS tunables and enumerate existing thermal profiles.
+allow vendor_hal_perf_default sysfs_fs_f2fs:file r_file_perms;
+allow vendor_hal_perf_default thermal_data_file:dir { open read };

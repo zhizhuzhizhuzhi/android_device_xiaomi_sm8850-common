@@ -1,0 +1,4 @@
+
+get_prop(cameraserver, vendor_sys_gpp_prop)
+allow cameraserver vendor_perf_service:service_manager find;
+binder_call(cameraserver, vendor_perfservice)

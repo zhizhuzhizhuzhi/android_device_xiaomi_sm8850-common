@@ -1,0 +1,3 @@
+
+# Factory video extensions query these existing public/restricted capabilities.
+get_prop(mediaserver, vendor_display_prop)

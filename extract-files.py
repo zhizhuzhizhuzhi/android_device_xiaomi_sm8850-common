@@ -48,6 +48,15 @@ def blob_fixup_miface_weak_nonsecure(
             f.seek(0)
             f.write(content)
 
+import importlib.util
+from pathlib import Path
+
+_pudding_spec = importlib.util.spec_from_file_location(
+    "pudding_blob_fixups", Path(__file__).with_name("pudding_blob_fixups.py"))
+_pudding_fixups = importlib.util.module_from_spec(_pudding_spec)
+_pudding_spec.loader.exec_module(_pudding_fixups)
+fixup_storage = _pudding_fixups.fixup_storage
+
 namespace_imports = [
     'device/xiaomi/sm8850-common',
     'hardware/qcom-caf/sm8850',
@@ -79,9 +88,15 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'vendor/etc/perf/targetresourceconfigs.xml': blob_fixup().call(fixup_storage),
+
+    "odm/etc/init/vendor.qti.camera.provider-service_64.rc": blob_fixup().regex_replace(r"/odm/bin/hw/vendor\.qti\.camera\.provider-service_64", "/vendor/bin/hw/vendor.qti.camera.provider-service_64"),
+    'vendor/bin/vppservice': blob_fixup()
+        .add_needed('libpudding_vpp_legacy_route.so'),
     'system_ext/etc/init/qspa_system.rc': blob_fixup()
         .regex_replace(r'\$\{ro\.boot\.vendor\.qspa:-default\}', 'default'),
     (
+        'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl',
         'odm/lib64/hw/displayfeature.default.so',
         'odm/lib64/libmiXmlParser.so',
         'vendor/bin/hw/audiohalservice.qti',
@@ -115,6 +130,7 @@ blob_fixups: blob_fixups_user_type = {
      ): blob_fixup()
         .replace_needed('android.hardware.sensors-V2-ndk.so','android.hardware.sensors-V3-ndk.so'),
      (
+       'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl',
        'vendor/lib64/libdolbyui.so',
      ): blob_fixup()
         .replace_needed('android.hardware.graphics.common-V6-ndk.so','android.hardware.graphics.common-V7-ndk.so'),
@@ -139,6 +155,13 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.media.audio.common.types-V4-cpp.so', 'android.media.audio.common.types-V5-cpp.so'),
     'odm/lib64/libmiface.so': blob_fixup()
         .call(blob_fixup_miface_weak_nonsecure),
+    # Apply after the ABI dependency fixups; code and constant sections are pinned.
+    'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl': blob_fixup().call(
+        _pudding_fixups.fixup, 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'),
+    'vendor/bin/hw/android.hardware.powerstats-service.qti': blob_fixup().call(
+        _pudding_fixups.fixup, 'vendor/bin/hw/android.hardware.powerstats-service.qti'),
+    'vendor/bin/init.kernel.post_boot-canoe_default_6_2.sh': blob_fixup().call(
+        _pudding_fixups.fixup, 'vendor/bin/init.kernel.post_boot-canoe_default_6_2.sh'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(

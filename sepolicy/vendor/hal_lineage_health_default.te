@@ -1,3 +1,0 @@
-allow hal_lineage_health_default vendor_sysfs_xm_power:dir search;
-allow hal_lineage_health_default vendor_sysfs_qcom_battery:dir search;
-allow hal_lineage_health_default vendor_sysfs_qcom_battery:file rw_file_perms;

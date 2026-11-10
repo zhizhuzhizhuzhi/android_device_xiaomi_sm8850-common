@@ -405,28 +405,6 @@ on post-fs-data
     chown root system /dev/xr_fbt
     chmod 666 /dev/xr_fbt
 
-    # Wait (2 second at most) for 'inherit_enable/sched_enable' entry to be created
-    wait /sys/kernel/qos_inherit/inherit_enable 2
-    wait /sys/kernel/qos_sched/sched_enable 2
-    wait /sys/kernel/speedlock/sl_enable 2
-    chmod 0660 /sys/kernel/qos_inherit/inherit_enable
-    chmod 0660 /sys/kernel/qos_sched/sched_enable
-    chmod 0660 /sys/kernel/speedlock/sl_enable
-    write /sys/kernel/qos_inherit/inherit_enable 0x3fff
-    write /sys/kernel/qos_sched/sched_enable 1
-    write /sys/kernel/speedlock/sl_enable 1
-
-    chown system system /sys/kernel/low_lat_mem/predo
-    chmod 0664 /sys/kernel/low_lat_mem/predo
-    chown system system /sys/kernel/low_lat_mem/start
-    chmod 0664 /sys/kernel/low_lat_mem/start
-    chown system system /sys/kernel/low_lat_mem/enable
-    chmod 0664 /sys/kernel/low_lat_mem/enable
-    chown system system /sys/kernel/low_lat_mem/dfx/enable
-    chmod 0664 /sys/kernel/low_lat_mem/dfx/enable
-    chown root system /sys/kernel/low_lat_mem/dfx/reset
-    chmod 0220 /sys/kernel/low_lat_mem/dfx/reset
-
 on late-fs
     #exec_start wait_for_keymaster
     mount_all /vendor/etc/fstab.qcom --late
@@ -794,8 +772,6 @@ on post-fs && property:ro.product.device=shuntian
 
 on property:sys.boot_completed=1
     start ufs_ffu_service
-    # Enable PowerHAL hint processing
-    setprop vendor.powerhal.init 1
 
 # enable/disable pcie linkdown optimization
 on property:persist.vendor.pcie.linkdown.optimization=1

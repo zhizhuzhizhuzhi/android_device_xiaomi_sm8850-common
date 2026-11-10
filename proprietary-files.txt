@@ -1,5 +1,7 @@
+# PAL/AGM audio backend entries pinned below are from Xiaomi17 OS4.0.4.0.XPCCNXM,
+# matching device ACDB and the complete Stream/Session/Device class ABI group.
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from Xiaomi 17 Pro Max (OS4.0.0.20.XPBCNXM). 
+## are from Xiaomi 17 (OS4.0.4.0.XPCCNXM).
 
 # libmialgo.so and libcamxcommonutils are on device specific
 
@@ -99,10 +101,10 @@ vendor/lib64/libadsprpc.so
 vendor/lib64/libloadalgo_stub.so
 
 # AGM
-vendor/lib64/libagm.so
-vendor/lib64/libagmclient.so
-vendor/lib64/libagmipcservice.so
-vendor/lib64/libagmmixer.so
+vendor/lib64/libagm.so|b88ab249decb6d1252b15b3a3cb8df73f07f5829
+vendor/lib64/libagmclient.so|5c9554ec112de454b01047496e91194cb3aecb77
+vendor/lib64/libagmipcservice.so|3ffcc9915a2623f4cf47a408ea3a463c894a2f3a
+vendor/lib64/libagmmixer.so|5512f7f5f20f1d88446150863908ee96743cafbf
 
 # Audio
 odm/etc/audio/silent-3sec.wav
@@ -135,10 +137,10 @@ vendor/lib64/hw/libaudioeffecthal.qti.so;DISABLE_DEPS;REQUIRED=audioeffectservic
 vendor/lib64/hw/libsoundtriggerhal.qti.so
 vendor/lib64/lib_lvacfs.so
 vendor/lib64/libadm.so
-vendor/lib64/libar-acdb.so
-vendor/lib64/libar-gpr.so
-vendor/lib64/libar-gsl.so
-vendor/lib64/libar-pal.so
+vendor/lib64/libar-acdb.so|7bcb0c2c9383823d97a6543f07b0921f42e32052
+vendor/lib64/libar-gpr.so|cfc223733daa67199ee155a83702a0a74bbc08bb
+vendor/lib64/libar-gsl.so|1dba04875b0586077b1e1f65cdea52500aa1f0ae
+vendor/lib64/libar-pal.so|e0ebb6f99b38d10cbbdb0e900461a95ef17141dc
 vendor/lib64/libarmemlog.so
 vendor/lib64/libats.so
 vendor/lib64/libaudio_log_utils.so
@@ -154,30 +156,30 @@ vendor/lib64/libcapiv2svacnnvendor.so
 vendor/lib64/libcapiv2svarnnvendor.so
 vendor/lib64/libcapiv2udk7vendor.so
 vendor/lib64/libcapiv2uvvendor.so
-vendor/lib64/libdev_bt.so
-vendor/lib64/libdev_display.so
-vendor/lib64/libdev_dummy.so
-vendor/lib64/libdev_ec_ref.so
-vendor/lib64/libdev_ext_ec.so
-vendor/lib64/libdev_fm.so
-vendor/lib64/libdev_handset_mic.so
-vendor/lib64/libdev_handset_va.so
-vendor/lib64/libdev_handset.so
-vendor/lib64/libdev_haptics.so
-vendor/lib64/libdev_headphone.so
-vendor/lib64/libdev_headset_mic.so
-vendor/lib64/libdev_headset_va.so
-vendor/lib64/libdev_proxy.so
-vendor/lib64/libdev_speaker_mic.so
-vendor/lib64/libdev_speaker.so
-vendor/lib64/libdev_tiantongrx.so
-vendor/lib64/libdev_tiantongtx.so
-vendor/lib64/libdev_ultrasound.so
-vendor/lib64/libdev_usb.so
+vendor/lib64/libdev_bt.so|489eec0de26d3867efe94261e3452c719da6ed10
+vendor/lib64/libdev_display.so|3e859f12effbe2c0dd0879db3f442265b4263628
+vendor/lib64/libdev_dummy.so|703dd13890153ece88fbd12f5c59c80e1e6f28ce
+vendor/lib64/libdev_ec_ref.so|0cce315c0db26747f98c19d968c1f96fb0ba3c4c
+vendor/lib64/libdev_ext_ec.so|2da14fa9e99decbd6e22d96cf103ec5e273bbcea
+vendor/lib64/libdev_fm.so|0de29c24ac4fa22fc156a4c198edf701010e49c1
+vendor/lib64/libdev_handset_mic.so|d87fede8baa63b0a5ebacadb5c19ffb89e0cf5c7
+vendor/lib64/libdev_handset_va.so|da1fec1cf8b0b9d75babc3de7ed02d66f3e4997d
+vendor/lib64/libdev_handset.so|17c138224b58c1a7dd0c7b8b0ef5cec45cde4e26
+vendor/lib64/libdev_haptics.so|1dcb945c6ca52482190ee8455e7202a8ae2c82db
+vendor/lib64/libdev_headphone.so|f44c9065ecfc154cd08eca7167c41d7447f1f994
+vendor/lib64/libdev_headset_mic.so|7a3191cd952d669f0eb4564668153f60965ac45a
+vendor/lib64/libdev_headset_va.so|178e0bcf947c4930fa07af9eff22a00870954e03
+vendor/lib64/libdev_proxy.so|bff521f175549af7dba3e41c9aa1dc5c770b2e39
+vendor/lib64/libdev_speaker_mic.so|93b76da0f7a6f5a43200fb1339e1cf6b784a7467
+vendor/lib64/libdev_speaker.so|321a364326c9c27431c5f1ca4556cc8f67f7d6d3
+vendor/lib64/libdev_tiantongrx.so|44e928f0599c2a2c941af2d20e5f9039c6ac90e4
+vendor/lib64/libdev_tiantongtx.so|cff8cc3ba85ae7548f879bb53b42685257377e34
+vendor/lib64/libdev_ultrasound.so|698a32bd6af6cec14ed1b6b4a20f2b39d6fdd993
+vendor/lib64/libdev_usb.so|78efdd486a9af83bb81c9253fd0ebee864fd2fa0
 vendor/lib64/libdlbpreg.so
 vendor/lib64/liblvacfs_wrapper.so
-vendor/lib64/liblx-ar_util.so
-vendor/lib64/liblx-osal.so
+vendor/lib64/liblx-ar_util.so|353cf0a82a9b2ace8cb8fcbfba309e9d871be882
+vendor/lib64/liblx-osal.so|f73ac3135976abd4cc6500b8d9ba62f9f5d9b6b5
 vendor/lib64/libmcs.so
 vendor/lib64/libmikaraoke.so
 vendor/lib64/libmis6.so
@@ -188,34 +190,34 @@ vendor/lib64/libmisoundfx_aosp_aidl_ext.so;SYMLINK=vendor/lib64/soundfx/libmisou
 vendor/lib64/libmisoundsa_multichannel.so
 vendor/lib64/libmisoundsa_sve.so
 vendor/lib64/libpal_net_if.so
-vendor/lib64/libpal_sounddose.so
+vendor/lib64/libpal_sounddose.so|021cdc4fadae2e0b9eb4bc4602e29108eaab5a19
 vendor/lib64/libpalclient.so
 vendor/lib64/libqasr.so
 vendor/lib64/libqtigefar.so;DISABLE_DEPS
-vendor/lib64/libsession_agm.so
-vendor/lib64/libsession_ar.so
-vendor/lib64/libsession_compress_config.so
-vendor/lib64/libsession_compress.so
-vendor/lib64/libsession_pcm_config.so
-vendor/lib64/libsession_pcm.so
-vendor/lib64/libsession_voice_config.so
-vendor/lib64/libsession_voice.so
-vendor/lib64/libstream_acd.so
-vendor/lib64/libstream_asr.so
-vendor/lib64/libstream_calltranslation.so
-vendor/lib64/libstream_common.so
-vendor/lib64/libstream_commonproxy.so
-vendor/lib64/libstream_compress.so
-vendor/lib64/libstream_contextproxy.so
-vendor/lib64/libstream_dummy.so
-vendor/lib64/libstream_haptics.so
-vendor/lib64/libstream_incall.so
-vendor/lib64/libstream_nontunnel.so
-vendor/lib64/libstream_pcm.so
-vendor/lib64/libstream_sensorpcmdata.so
-vendor/lib64/libstream_sensorrenderer.so
-vendor/lib64/libstream_soundtrigger.so
-vendor/lib64/libstream_ultrasound.so
+vendor/lib64/libsession_agm.so|d2062a064ca1d74bcbaa5efe17ee5bbd31ad9f05
+vendor/lib64/libsession_ar.so|ffa5a5e4300cf8bb794c489a5f3d02468ac3b336
+vendor/lib64/libsession_compress_config.so|fe90a0d775b52da5b0c9ce4567558daa1a8ab39e
+vendor/lib64/libsession_compress.so|9c02715c83c04c5ad9dba7d91a613f22a1617d83
+vendor/lib64/libsession_pcm_config.so|2354eb9fa5715f643369e69efb3c7108d6b5ba12
+vendor/lib64/libsession_pcm.so|700684683c4a8123eaecec1a9af2c71d446be158
+vendor/lib64/libsession_voice_config.so|b12b00303ec4c496876b3e94a7072204cbcd3711
+vendor/lib64/libsession_voice.so|c23f5b1527761ccf40acbc4b3f1ecdf90f32fff2
+vendor/lib64/libstream_acd.so|3ba8a40b2b21d715400ecf404cce2bd61ec43b6a
+vendor/lib64/libstream_asr.so|ed181c252240a83e9e7e66ae5b7ca88c5c2c6162
+vendor/lib64/libstream_calltranslation.so|8852f1d7cf6492edb192305f1a1838de383a5688
+vendor/lib64/libstream_common.so|9eadf465c2963bb63ec8ba56ff7a812d4da03337
+vendor/lib64/libstream_commonproxy.so|78fe1bfbeb689e653afff50c625c7b7e917b771d
+vendor/lib64/libstream_compress.so|27eda28ec3fa144d71161667713c303d99a8923b
+vendor/lib64/libstream_contextproxy.so|ec604284ad6a07557a7a64d4bedcbe6fce0636a4
+vendor/lib64/libstream_dummy.so|cb0b76503f513a53fb293dab38a69b4373cc102b
+vendor/lib64/libstream_haptics.so|84c8dd9467ea5f43f66d4ca6c05c1c0076417dfd
+vendor/lib64/libstream_incall.so|bca69bf9088740aba65292649ebcec200da8e066
+vendor/lib64/libstream_nontunnel.so|fbd5042cf46faedb706c6bf2be130a3068e44ac3
+vendor/lib64/libstream_pcm.so|dd09981056cdbc5289da6b87bf8ae38ea2970b2f
+vendor/lib64/libstream_sensorpcmdata.so|35f1a753f376112e74b774fb97531480a7373cc9
+vendor/lib64/libstream_sensorrenderer.so|f18ea25c1459f49e8bddb1235cdaa2bcfd30f25b
+vendor/lib64/libstream_soundtrigger.so|8c9ad54c570917e9cc5b651f765912677e4158a2
+vendor/lib64/libstream_ultrasound.so|4ff6c37890f0ef8b3138d7e9bb9007aac34a3ed5
 vendor/lib64/libtensorflowlite_c_qcom.so
 vendor/lib64/libtiantongpal.so
 vendor/lib64/libultrasound_notify.so
@@ -408,6 +410,7 @@ vendor/lib64/libsysmon_cdsp_skel.so
 vendor/etc/charger_diag.cfg
 
 # CIT Sensor
+odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl
 odm/etc/init/vendor.xiaomi.sensor.citsensorservice.aidl.rc
 odm/etc/vintf/manifest/vendor.xiaomi.sensor.citsensorservice.aidl.xml
 
@@ -824,8 +827,10 @@ vendor/lib64/vendor.xiaomi.hardware.fx.tunnel-V1-ndk.so
 vendor/lib64/vendor.qti.hardware.fingerprint-V1-ndk.so
 
 # FM
-vendor/lib64/vendor.qti.hardware.fm@1.0.so
-vendor/lib64/vendor.qti.hardware.fm-V1-ndk.so
+# AOSPA generates the same versioned FM Binder interface; avoid duplicate vendor output.
+# vendor/lib64/vendor.qti.hardware.fm@1.0.so;MODULE_SUFFIX=_vendor
+# AOSPA generates the same versioned FM Binder interface; avoid duplicate vendor output.
+# vendor/lib64/vendor.qti.hardware.fm-V1-ndk.so;MODULE_SUFFIX=_vendor
 
 # Gatekeeper
 vendor/bin/hw/android.hardware.gatekeeper-rust-service-qti
@@ -1070,8 +1075,8 @@ vendor/etc/android.hardware.security.onekeymint-service-qti.rc
 # Listen
 vendor/lib64/libeai_fixed.so
 vendor/lib64/libeai_float.so
-vendor/lib64/libfmpal.so
-vendor/lib64/libhfp_pal.so
+vendor/lib64/libfmpal.so|2bbb55428f6e0995a21f4448b4ddd1839f730c50
+vendor/lib64/libhfp_pal.so|0cb8ef97aaaffee6473739c68880d43d85f7012f
 vendor/lib64/liblistensoundmodel2vendor.so
 vendor/lib64/liblistensoundmodelaidl.so
 vendor/lib64/vendor.qti.hardware.ListenSoundModelAidl-V1-ndk.so
@@ -1084,7 +1089,7 @@ odm/lib64/libteecli.so
 
 # Media
 system_ext/lib64/libmmosal.so
-system_ext/lib64/libmmparser_lite.so
+system_ext/lib64/libwfdparserlite.so
 vendor/bin/hw/qconfigservice
 vendor/bin/hw/vendor.qti.media.c2@1.0-service
 vendor/bin/init.qti.media.sh
@@ -1171,6 +1176,15 @@ vendor/lib64/libsvswcpu.so
 vendor/lib64/qti.video.utils.videobufferlayout.so
 vendor/lib64/vendor.xiaomi.hardware.mediaeventgatherservice-V1-ndk.so
 
+# MemHal
+vendor/bin/hw/vendor.qti.MemHal-service
+vendor/etc/init/vendor.qti.MemHal-service.rc
+vendor/etc/vintf/manifest/vendor.qti.MemHal.xml
+vendor/lib64/libmemgen.so
+vendor/lib64/libmemhalutils.so
+vendor/lib64/libqti-MemHal-client.so
+vendor/lib64/vendor.qti.MemHal-V1-ndk.so
+
 # Mlipay
 odm/bin/mlipayd
 odm/etc/init/vendor.xiaomi.hardware.mlipay-service.rc
@@ -1229,7 +1243,7 @@ odm/lib64/libQnnTFLiteDelegate.so
 
 # NFC
 odm/etc/libnfc-nci.conf:vendor/etc/libnfc-nci.conf
-odm/etc/libnfc-nxp.conf:vendor/etc/libnfc-nxp.conf
+# Pudding uses ST NFC; no libnfc-nxp.conf is shipped in the verified CN OS4 package.
 odm/lib64/nfc_nci.st21nfc.st.so
 system_ext/etc/permissions/com.nxp.nfc.nq.xml
 vendor/bin/nqnfcinfo
@@ -1259,6 +1273,29 @@ vendor/lib64/libpasrutils.so
 vendor/lib64/vendor.qti.memory.pasrmanager-V1-ndk.so
 vendor/lib64/vendor.qti.memory.pasrmanager@1.0.so
 vendor/lib64/vendor.qti.memory.pasrmanager@1.1.so
+
+# Performance
+vendor/bin/hw/vendor.qti.hardware.perf2-hal-service
+vendor/etc/init/vendor.qti.hardware.perf2-hal-service.rc
+vendor/etc/perf/commonresourceconfigs.xml
+vendor/etc/perf/commonsysnodesconfigs.xml
+vendor/etc/perf/perfboostsconfig.xml
+vendor/etc/perf/targetconfig.xml
+vendor/etc/perf/targetresourceconfigs.xml
+vendor/etc/perf/targetsysnodesconfigs.xml
+vendor/etc/vintf/manifest/vendor.qti.hardware.perf2.xml
+vendor/lib64/libperf-thermalprovider.so
+vendor/lib64/libperfconfig.so
+vendor/lib64/libperfioctl.so
+vendor/lib64/libq-perflog.so
+vendor/lib64/libqti-engine-loader.so
+vendor/lib64/libqti-perfd-client.so
+vendor/lib64/libqti-perfd.so
+vendor/lib64/libqti-s3tf.so
+vendor/lib64/libqti-scenariod.so
+vendor/lib64/libqti-sslite.so
+vendor/lib64/libqti-util.so
+vendor/lib64/vendor.qti.hardware.perf2-V1-ndk.so
 
 # Peripheral manager
 vendor/bin/pm-proxy
@@ -1400,6 +1437,8 @@ vendor/lib64/vendor.qti.qspmhal-V1-ndk.so
 
 # QTI service tracker
 vendor/bin/hw/vendor.qti.hardware.servicetrackeraidl-service
+vendor/bin/qt-service
+vendor/etc/init/init.qt-service.rc
 vendor/etc/init/vendor.qti.hardware.servicetrackeraidl-service.rc
 vendor/etc/vintf/manifest/vendor.qti.hardware.servicetrackeraidl-service.xml
 vendor/lib64/hw/vendor.qti.hardware.servicetrackeraidl-impl.so
@@ -1644,6 +1683,7 @@ vendor/etc/init/init.vendor.sensors.rc
 vendor/etc/init/vendor.qti.hardware.sensorscalibrate-service.rc
 vendor/etc/init/vendor.sensors.sscrpcd.rc
 vendor/etc/sensors/config/chre_dynamic_sensors.json
+vendor/etc/sensors/hals.conf
 vendor/etc/sensors/sns_reg_config
 vendor/etc/vintf/manifest/vendor.qti.hardware.sensorscalibrate.xml
 vendor/lib64/hw/sensors.dynamic_sensor_hal.so
@@ -1663,6 +1703,7 @@ vendor/lib64/libsnsdiaglog.so
 vendor/lib64/libsnsutils.so
 vendor/lib64/libssc_default_listener.so
 vendor/lib64/libsuidlookup.so
+vendor/lib64/sensors.qsh.so
 vendor/lib64/vendor.qti.hardware.sensorscalibrate-V1-ndk.so
 
 # SMC Invoke
@@ -1693,7 +1734,7 @@ vendor/lib64/vendor.qti.snapdragonServices-V2-ndk.so
 vendor/lib64/vendor.qti.snapdragonServices.qape-V1-ndk.so
 
 # Soter
-mi_ext/product/app/SoterService/SoterService.apk:product/app/SoterService/SoterService.apk
+product/app/SoterService/SoterService.apk:product/app/SoterService/SoterService.apk
 vendor/bin/hw/vendor.qti.hardware.soter-service
 vendor/bin/vendor.qti.hardware.soter-provision
 vendor/etc/init/vendor.qti.hardware.soter-service.rc
@@ -1868,34 +1909,34 @@ vendor/etc/wifi/wpa_supplicant_overlay.conf
 vendor/lib64/libWlanServiceJni.so
 
 # WiFi Display (system) - from CPH2745_11_C_OTA_1020_all_Qyq7GC_00011011
-system/framework/WfdCommon.jar;BOOT_JAR|b9fd0baae787d8bc4041e7d79411c3a452e094a8
-system_ext/bin/wfdservice64|d67839393c709f8c4d7bd536f0e5cf2a9c18a7e8
+system/framework/WfdCommon.jar;BOOT_JAR|c3b24e2d668c84ec878efccc148cf55e68a29d4b
+system_ext/bin/wfdservice64|6b738758fe3d21d6d53d3fb522e1321b54592fa9
 system_ext/etc/init/wfdservice.rc|907def8565d8f91f531ca7dfad880af05d540b0c
 system_ext/etc/permissions/wfd-system-ext-privapp-permissions-qti.xml|6669d5ee462c981663b8ac573d84d334e4eed96c
-system_ext/etc/seccomp_policy/wfdservice64.policy|8fbe45e7c1468dc12021bb030af3b5bc81062e0e
+system_ext/etc/seccomp_policy/wfdservice64.policy|1e331272649395423b11c575892e0bdc9433b820
 system_ext/etc/wfdconfigsink.xml|7bbf8092ff574be7ed951b1a4026471f51e4b6f5
-system_ext/lib64/libmmrtpdecoder.so|7971b5de27f7105fd77a15e5fca5401ad8b878a6
-system_ext/lib64/libmmrtpencoder.so|660417edcd28d0a89b87b34609fdb5f89856b8f5
-system_ext/lib64/libwfdavenhancements.so|c460b1f585902fa1cc1bd4386b5017e252939526
-system_ext/lib64/libwfdclient.so|8c24d161dace8c5f089574cca278072a72c3467c
-system_ext/lib64/libwfdcommonutils.so|8ea632b424023b4facbbdadaf90fc30d5f2631e7
-system_ext/lib64/libwfdconfigutils.so|2ba443281a75baf4c40a0bfcbfcd2db296405658
-system_ext/lib64/libwfddisplayconfig.so|f83142f12c2aaef34178b4091d5e03cb563a31ad
-system_ext/lib64/libwfdmminterface.so|e97b771999cc69a76a2918f014ac0aac8e0872c6
-system_ext/lib64/libwfdmmsink.so|d2aa9d4663c4c2fbadcac91724167955ae6a3bac
-system_ext/lib64/libwfdmmsrc_system.so|ab23a6ce749d1ecc9bef869fae0eb3a0e293d389|ab23a6ce749d1ecc9bef869fae0eb3a0e293d389
-system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|f3c438b50e32156d630cb2f6ba608104fe5be421
-system_ext/lib64/libwfdrtsp.so|4595976a1897782e22fc7d519c7293d0a81b4d15
-system_ext/lib64/libwfdservice.so|9450ceb1750849a7aca7e38d1203e1e0277c76b0|9450ceb1750849a7aca7e38d1203e1e0277c76b0
-system_ext/lib64/libwfdsinksm.so|18fa4c0fed1b5bc4c34a5c29ed11f67891c54ad3
-system_ext/lib64/libwfduibcinterface.so|1d0377b18ca2d204cb30c705cc5f7297308ba733
-system_ext/lib64/libwfduibcsink.so|c3508c6b7bf37d0efa8c5b688faf8345b06a546b
-system_ext/lib64/libwfduibcsinkinterface.so|b6630e84f5596fbd08b9de4e519b3907e4924e15
-system_ext/lib64/libwfduibcsrc.so|94ab48fac2d95bb7ca7b3291166540304ea5fe97
-system_ext/lib64/libwfduibcsrcinterface.so|8174319b25aedf98a5e33d9dc4f12b0ced90c07c
-system_ext/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so|b6b0026a1a839ef6345508e6f350ef1e99e5e7fd
-system_ext/lib64/vendor.qti.hardware.wifidisplaysession_aidl-V2-ndk.so|5885489e48c606ae98307410cd0ccefdc01a363d
-system_ext/priv-app/WfdService/WfdService.apk|0fcb88dd5d08c0ee13a5683071926549077410b4
+system_ext/lib64/libmmrtpdecoder.so|51c486b525879c1239062f0fa6b591c3e0abaaa0
+system_ext/lib64/libmmrtpencoder.so|946d85b6b852ee95e17b40b00c4c85ebfa72c85c
+system_ext/lib64/libwfdavenhancements.so|68ab62308ade51f517dd03d06efb24820be793f0
+system_ext/lib64/libwfdclient.so|ae443c8657e680558cce30039409cee1e6ab5505
+system_ext/lib64/libwfdcommonutils.so|27c411978b486ccc075862fa2eff450990b9d47a
+system_ext/lib64/libwfdconfigutils.so|ffac37cc7b93538d25af6304d02ecf0062ec1f00
+system_ext/lib64/libwfddisplayconfig.so|2717202736b678390be7518ce6f69a63079e4217
+system_ext/lib64/libwfdmminterface.so|b560306dbc7b2bffb734c8eb6439dd3721f75c12
+system_ext/lib64/libwfdmmsink.so|4e4cce93cdc63c681e2dd9d42afdbf92170278fe
+system_ext/lib64/libwfdmmsrc_system.so|69e08746a9557ee5fba3e02a8170032db0fa0105
+system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|932441e979fbbacdb6924a773f1c611b0304ee1e
+system_ext/lib64/libwfdrtsp.so|14eec96c4fa615096c473d5a269ba315a53cfd00
+system_ext/lib64/libwfdservice.so|429839b831a8b16fb858179241dc6183c50bdf13
+system_ext/lib64/libwfdsinksm.so|880550313eb874f7ca0dac67e221a1252996155c
+system_ext/lib64/libwfduibcinterface.so|62a596c93efa57bdc79b078d74a3ccf4d19d1f58
+system_ext/lib64/libwfduibcsink.so|a6fc5d0245e23648812a535f7338d562c9317f09
+system_ext/lib64/libwfduibcsinkinterface.so|2db07ec7a9a6206d2782439e247b35fbe62a550f
+system_ext/lib64/libwfduibcsrc.so|ac3e0988fb5c36c6c4561f04e0e5d53d7de2ad76
+system_ext/lib64/libwfduibcsrcinterface.so|d19e9b5c35f61cc696a9c999dce6eb11d781bd8c
+system_ext/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so|f195cfd660ea47c211ccb5890072f7217649c23b
+system_ext/lib64/vendor.qti.hardware.wifidisplaysession_aidl-V2-ndk.so|8fbb064b3ab56bf4bfe74de11006c10b06c39b23
+system_ext/priv-app/WfdService/WfdService.apk|3837139f985d835cd1148d44bf6985b801f6c1ed
 
 # WiFi Display (vendor)
 vendor/bin/wfdhdcphalservice
@@ -1939,3 +1980,45 @@ vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
 
 # Xiaomi MAC address
 vendor/bin/nv_mac
+
+# Previously installed pudding runtime components, now sourced from matching CN OS4.
+vendor/lib64/libaodoptfeature.so
+vendor/lib64/libcamerapoweroptfeature.so
+vendor/lib64/libgamepoweroptfeature.so
+vendor/lib64/liblearningmodule.so
+vendor/lib64/liblmutils-ns.so
+vendor/lib64/libmemperfd.so
+vendor/lib64/libmeters-ns.so
+vendor/lib64/libmeters.so
+vendor/lib64/liboffscreenpoweroptfeature.so
+vendor/lib64/libperfdb.so
+vendor/lib64/libpowercallback.so
+vendor/lib64/libpowercore.so
+vendor/lib64/libprefapps.so
+vendor/lib64/libprocomp.so
+vendor/lib64/libpsmoptfeature.so
+vendor/lib64/libqesdk2_0.so
+vendor/lib64/libqesdk_manager.so
+vendor/lib64/libqesdk_qshsession.so
+vendor/lib64/libqesdoem_query_sys.so
+vendor/lib64/libqti-appclassifier.so
+vendor/lib64/libqti-jankrescue.so
+vendor/lib64/libqti-lllite.so
+vendor/lib64/libqti-perfextn-intf.so
+vendor/lib64/libqti-qape-engine.so
+vendor/lib64/libqti-qesdk-secure.so
+vendor/lib64/libqti-utils.so
+vendor/lib64/libreffeature.so
+vendor/lib64/libskewknob.so
+vendor/lib64/libstandbyfeature.so
+vendor/lib64/libvideooptfeature.so
+vendor/lib64/vendor.qti.hardware.power.powermodule-V1-ndk.so
+vendor/lib64/vendor.qti.qesdhal-impl.so
+vendor/lib64/vendor.qti.qesdhal@1.0.so
+vendor/lib64/vendor.qti.qesdhal@1.1.so
+vendor/lib64/vendor.qti.qesdhal@1.2.so
+vendor/lib64/vendor.qti.qesdhal@1.3.so
+vendor/lib64/vendor.qti.qesdhalaidl-V2-ndk.so
+vendor/lib64/vendor.qti.qesdsys-V3-ndk.so
+vendor/etc/vintf/manifest/vendor.qti.hardware.power.powermodule.xml
+vendor/bin/poweropt-service

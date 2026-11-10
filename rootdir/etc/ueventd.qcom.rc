@@ -675,3 +675,7 @@ subsystem mi_display
 # MIUI ADD: Adapt_MIUIAdaptFrame
 /dev/mi_display/*         0666   root       graphics
 # END Adapt_MIUIAdaptFrame
+
+# Pudding native DRM panel: permit the system/graphics composer to control backlight.
+/sys/devices/platform/soc/9800000.display-subsystem/9ac0000.dsi/9ac0000.dsi.0/backlight/9ac0000.dsi.0 brightness 0664 system graphics
+/sys/devices/platform/soc/9800000.display-subsystem/9ac0000.dsi/9ac0000.dsi.0/backlight/9ac0000.dsi.0 bl_power 0664 system graphics

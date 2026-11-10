@@ -100,6 +100,7 @@ PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/mem_logger_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mem_logger_config.xml \
     $(AUDIO_HAL_DIR)/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
     $(AUDIO_HAL_DIR)/vendor_audio_interfaces.xml:$(TARGET_COPY_OUT_VENDOR)/etc/vendor_audio_interfaces.xml \
+    $(LOCAL_PATH)/configs/audio/audio_module_config_primary.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_module_config_primary.xml \
     $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_canoe/audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
@@ -218,12 +219,8 @@ PRODUCT_COPY_FILES += \
 # Kernel
 ifeq ($(TARGET_OPT_IN_OSS_KERNEL),true)
 PRODUCT_COPY_FILES += \
-    kernel/platform/kernel-6.12/vendor/xiaomi/sm8850/modules-lists/modules.systemdlkm_blocklist.msm.canoe:$(TARGET_COPY_OUT_VENDOR_DLKM)/lib/modules/system_dlkm.modules.blocklist
+    kernel/platform/kernel-6.12/vendor/xiaomi/kernel/modules-lists/modules.systemdlkm_blocklist.msm.canoe:$(TARGET_COPY_OUT_VENDOR_DLKM)/lib/modules/system_dlkm.modules.blocklist
 endif
-
-# Keylayout
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl
 
 # Keymint
 PRODUCT_SOONG_NAMESPACES += \
@@ -242,13 +239,13 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
 
 # Lineage Health
-$(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
-$(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
-$(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/xm_power/charger/smart_charge/smart_night)
-$(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
+$(call soong_config_set,aospa_health,charging_control_charging_disabled,1)
+$(call soong_config_set,aospa_health,charging_control_charging_enabled,0)
+$(call soong_config_set,aospa_health,charging_control_charging_path,/sys/class/xm_power/charger/smart_charge/smart_night)
+$(call soong_config_set_bool,aospa_health,charging_control_supports_bypass,false)
 
 PRODUCT_PACKAGES += \
-    vendor.lineage.health-service.default
+    vendor.aospa.health-service.default
 
 # Memtrack
 PRODUCT_PACKAGES += \
@@ -300,20 +297,26 @@ PRODUCT_CHECK_PREBUILT_MAX_PAGE_SIZE := false
 PRODUCT_BUILD_PVMFW_IMAGE := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# Perf
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/perf/perfconfigstore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfconfigstore.xml \
+    $(LOCAL_PATH)/configs/perf/qapeconfigstore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/qapeconfigstore.xml
+
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.lineage-libperfmgr \
-    libqti-perfd-client
+    android.hardware.power-service-qti
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json \
-    $(LOCAL_PATH)/configs/perf/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+    $(LOCAL_PATH)/configs/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
+PRODUCT_COPY_FILES += \
+    vendor/qcom/opensource/power/config/canoe/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 $(call soong_config_set,qtipower,mode_ext_lib,//$(LOCAL_PATH):libpowermode-ext-xiaomi)
 
 # PowerShare
 PRODUCT_PACKAGES += \
-    vendor.lineage.powershare-service.default
+    vendor.aospa.powershare-service
 
 $(call soong_config_set,lineage_powershare,powershare_path,/sys/class/xm_power/charger/wls_rev_charge/reverse_chg_mode)
 
@@ -332,6 +335,11 @@ PRODUCT_PACKAGES += \
     init.xiaomi.rc \
     ueventd.qcom.rc
 
+# Myron's current kernel has no legacy QoS or low-latency memory sysfs interfaces.
+ifeq ($(filter %_myron myron,$(TARGET_PRODUCT)),)
+PRODUCT_PACKAGES += init.xiaomi.legacy-qos.rc
+endif
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
 
@@ -341,12 +349,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors-service.xiaomi-multihal \
-    sensors.xiaomi.v2 \
-    sensor-notifier
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/hals.conf:$(TARGET_COPY_OUT_ODM)/etc/sensors/hals.conf
+    android.hardware.sensors-service.xiaomi-multihal
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -365,11 +368,6 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/google/interfaces \
-    hardware/google/pixel/pixelstats \
-    hardware/google/pixel/power-libperfmgr \
-    hardware/lineage/interfaces/power-libperfmgr \
-    hardware/qcom-caf/common/libqti-perfd-client \
     hardware/xiaomi
 
 PRODUCT_PACKAGES += \

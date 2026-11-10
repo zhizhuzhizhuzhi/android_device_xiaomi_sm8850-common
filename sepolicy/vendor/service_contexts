@@ -56,3 +56,5 @@ vendor.xiaomi.hardware.radio.IXmRadio/slot1          u:object_r:vendor_hal_telep
 vendor.xiaomi.hardware.radio.IXmRadio/slot2          u:object_r:vendor_hal_telephony_service2:s0
 vendor.xiaomi.hardware.radio.cdc.IXmRadioCdc/slot1           u:object_r:vendor_hal_telephony_service2:s0
 vendor.xiaomi.hardware.radio.cdc.IXmRadioCdc/slot2           u:object_r:vendor_hal_telephony_service2:s0
+
+vendor.xiaomi.hardware.misys.core.IMiSysCore/default    u:object_r:vendor_hal_pudding_misys_core_service:s0

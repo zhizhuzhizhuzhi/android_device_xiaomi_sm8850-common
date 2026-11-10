@@ -13,3 +13,8 @@ binder_call(parts_app, hal_touchfeature_xiaomi_default)
 allow parts_app system_app_data_file:dir create_dir_perms;
 allow parts_app system_app_data_file:file create_file_perms;
 allow parts_app system_app_data_file:lnk_file create_file_perms;
+
+# GPU configuration and Xiaomi performance client used during app startup.
+allow parts_app gpu_service:service_manager find;
+allow parts_app vendor_perf_service:service_manager find;
+binder_call(parts_app, vendor_perfservice)

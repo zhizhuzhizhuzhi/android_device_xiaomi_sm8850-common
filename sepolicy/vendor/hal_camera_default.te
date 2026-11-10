@@ -65,7 +65,33 @@ allow hal_camera_default vendor_sysfs_camera_xiaomi:file rw_file_perms;
 allow hal_camera_default vendor_persist_sensors_file:dir search;
 allow hal_camera_default vendor_persist_sensors_file:file rw_file_perms;
 allow hal_camera_default vendor_miev_device:chr_file { write open };
-allow hal_camera_default cgroup:file read;
 
 dontaudit hal_camera_default fs_bpf:dir search;
 dontaudit hal_camera_default fs_bpf_vendor:dir search;
+
+# Pudding platform camera clients (including Android 16+ platform_app domains).
+allow platform_app_all { hal_aidlbgservice_service hal_postprocservice_service hal_mivimessage_service }:service_manager find;
+binder_call(platform_app_all, hal_camera_server)
+binder_call(hal_camera_server, platform_app_all)
+get_prop(platform_app_all, vendor_camera_sensor_prop)
+get_prop(platform_app_all, vendor_displayfeature_prop)
+get_prop(platform_app_all, vendor_audio_prop)
+
+# The platform signed, system UID dimming settings uses the OEM display HAL.
+hal_client_domain(system_app, vendor_hal_displayfeature_xiaomi)
+r_dir_file(system_app, vendor_sysfs_displayfeature)
+
+# Platform-signed Xiaomi Camera reads its public P3 capability property.
+get_prop(platform_app_36, vendor_camera_p3enable_prop)
+
+# Factory OpenCL reads the GPU device symlink.
+allow hal_camera_default vendor_sysfs_kgsl:lnk_file r_file_perms;
+
+# OS4 MiAlgo decrypts its algorithm sections during library initialization.
+# Matches the factory vendor policy; keep the camera HAL enforcing.
+allow hal_camera_default self:process execmem;
+
+# Factory camera scheduling reads, plus a precisely labelled UFS statistic.
+allow hal_camera_default cgroup:file { getattr open read };
+allow hal_camera_default vendor_sysfs_kgsl:file { getattr open read };
+allow hal_camera_default vendor_sysfs_ufs_wb_stats:file { getattr open read };

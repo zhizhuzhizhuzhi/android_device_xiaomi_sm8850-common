@@ -69,3 +69,8 @@ type vendor_data_touchreport_file, data_file_type, file_type;
 
 # Wlan
 type vendor_mac_vendor_data_file, data_file_type, file_type, mlstrustedobject;
+
+# UFS write-booster availability counter; no device controls.
+type vendor_sysfs_ufs_wb_stats, fs_type, sysfs_type;
+
+type vendor_sysfs_remoteproc_coredump, fs_type, sysfs_type;

@@ -159,7 +159,7 @@ ro.vendor.video.style.by.layer.support u:object_r:vendor_displayfeature_prop:s0
 ro.vendor.whitepoint_calibration_enable u:object_r:vendor_displayfeature_prop:s0
 ro.vendor.xiaomi.bl.poll u:object_r:vendor_displayfeature_prop:s0
 ro.vendor.xiaomi.sr.support u:object_r:vendor_displayfeature_prop:s0
-vendor.display.enable_brightness_drm_prop u:object_r:vendor_displayfeature_prop:s0
+vendor.display.enable_brightness_drm_prop u:object_r:vendor_display_prop:s0
 vendor.display.hwc_backlight.support u:object_r:vendor_displayfeature_prop:s0
 vendor.display.panel.calibration.status u:object_r:vendor_displayfeature_prop:s0
 vendor.display.resolution_aosp u:object_r:vendor_displayfeature_prop:s0
@@ -261,3 +261,9 @@ ro.vendor.touch.touchscheduler.enable  u:object_r:vendor_touchfeature_prop:s0
 ro.vendor.touchfeature.type            u:object_r:vendor_touchfeature_prop:s0
 vendor.panel.                          u:object_r:vendor_panel_info_prop:s0
 vendor.touchfeature.                   u:object_r:vendor_touchfeature_prop:s0
+
+# Original ST NFC diagnostics use NFC-owned vendor properties.
+persist.vendor.minfc.dfx.enable u:object_r:vendor_nfc_prop:s0 exact string
+vendor.minfc.dfx.test u:object_r:vendor_nfc_prop:s0 exact string
+
+ro.vendor.aware_available u:object_r:vendor_pudding_wifi_aware_capability_prop:s0 exact bool

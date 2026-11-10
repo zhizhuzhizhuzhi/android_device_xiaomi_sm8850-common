@@ -62,7 +62,6 @@ TARGET_NO_BOOTLOADER := true
 # Dtbo
 ifeq ($(TARGET_OPT_IN_OSS_KERNEL),true)
 BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
-BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_NEEDS_DTBOIMAGE := true
 endif
 
@@ -85,9 +84,9 @@ BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
     lz4asm.support=1 \
-    swinfo.fingerprint=$(LINEAGE_VERSION) \
-    mtdoops.fingerprint=$(LINEAGE_VERSION) \
-    bootmonitor.fingerprint=$(LINEAGE_VERSION)
+    swinfo.fingerprint=$(AOSPA_VERSION) \
+    mtdoops.fingerprint=$(AOSPA_VERSION) \
+    bootmonitor.fingerprint=$(AOSPA_VERSION)
 
 BOARD_BOOTCONFIG := \
     androidboot.hardware=qcom \
@@ -103,8 +102,8 @@ BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 
 ifeq ($(TARGET_OPT_IN_OSS_KERNEL),true)
-TARGET_KERNEL_PLATFORM_TARGET := $(PRODUCT_DEVICE)_perf
-TARGET_KERNEL_SOURCE := vendor/xiaomi/sm8850
+TARGET_KERNEL_PLATFORM_TARGET := canoe_perf
+TARGET_KERNEL_SOURCE := vendor/xiaomi/kernel
 TARGET_KERNEL_UNSAFE_DDK_HEADERS := true
 TARGET_KERNEL_VERSION := 6.12
 
@@ -163,7 +162,7 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
 
 # Security
-BOOT_SECURITY_PATCH := 2026-09-01
+BOOT_SECURITY_PATCH := 2026-10-01
 VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 
 # Verified Boot
@@ -188,12 +187,12 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
 
 # VINTF
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     $(COMMON_PATH)/configs/vintf/compatibility_matrix.device.xml \
     $(COMMON_PATH)/configs/vintf/compatibility_matrix.xiaomi.xml \
     hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml
 
-DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix_aidl.xml
+DEVICE_MATRIX_FILE += hardware/qcom-caf/common/compatibility_matrix_aidl.xml
 
 DEVICE_MANIFEST_SKUS := canoe
 DEVICE_MANIFEST_CANOE_FILES := \
@@ -217,3 +216,13 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
 include vendor/xiaomi/sm8850-common/BoardConfigVendor.mk
+
+# AOSPA prebuilt-kernel integration.
+TARGET_PREBUILT_KERNEL := device/xiaomi/pudding-kernel/kernel
+TARGET_KERNEL_VERSION := 6.12
+TARGET_POWERSHARE_NODE := /sys/class/xm_power/charger/wls_rev_charge/reverse_chg_mode
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/xm_power/charger/smart_charge/smart_night
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_DISABLED := 1
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_ENABLED := 0
+TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
+include hardware/qcom-caf/common/BoardConfigQcom.mk

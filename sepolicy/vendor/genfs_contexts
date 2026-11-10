@@ -36,16 +36,8 @@ genfscon sysfs /devices/virtual/xm_power/mca_event u:object_r:vendor_sysfs_xm_po
 genfscon sysfs /devices/virtual/xm_power/typec u:object_r:vendor_sysfs_xm_power:s0
 genfscon sysfs /devices/virtual/xm_power/wireless_master u:object_r:vendor_sysfs_xm_power:s0
 
-# Perf
-genfscon proc /sys/walt u:object_r:proc_sched:s0
-
-# Sensors
-genfscon sysfs /devices/virtual/touch/touch_dev/gesture_double_tap_enabled u:object_r:vendor_sysfs_sensors:s0
-genfscon sysfs /devices/virtual/touch/touch_dev/gesture_double_tap_state u:object_r:vendor_sysfs_sensors:s0
-genfscon sysfs /devices/virtual/touch/touch_dev/gesture_single_tap_enabled u:object_r:vendor_sysfs_sensors:s0
-genfscon sysfs /devices/virtual/touch/touch_dev/gesture_single_tap_state u:object_r:vendor_sysfs_sensors:s0
-genfscon sysfs /devices/virtual/touch/touch_dev/fod_longpress_gesture_enabled u:object_r:vendor_sysfs_sensors:s0
-genfscon sysfs /devices/virtual/touch/touch_dev/fod_press_status u:object_r:vendor_sysfs_sensors:s0
+# Powerstats
+genfscon sysfs /devices/virtual/powercap/qpt u:object_r:vendor_sysfs_powerstats:s0
 
 # Touchfeature
 genfscon proc /tp_fw_version u:object_r:proc_tp_file:s0
@@ -93,7 +85,6 @@ genfscon sysfs /devices/virtual/touch/touch_dev/update_rawdata u:object_r:sysfs_
 genfscon sysfs /devices/platform/soc/19c0000.qcom,qupv3_3_geni_se/1990000.qcom,qup_uart/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/1ac0000.qcom,qupv3_4_geni_se/1a88000.i2c/i2c-21/21-0028/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/1ac0000.qcom,qupv3_4_geni_se/1a8c000.i2c/i2c-22/22-0033/wakeup u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/soc/1ac0000.qcom,qupv3_4_geni_se/1a80000.spi/spi_master/spi19/spi19.0/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_2_geni_se/88c000.i2c/i2c-11/11-0055/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_2_geni_se/88c000.i2c/i2c-11/11-006f/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_1_geni_se/a90000.spi/spi_master/spi4/spi4.0/wakeup u:object_r:sysfs_wakeup:s0
@@ -115,3 +106,15 @@ genfscon sysfs /devices/platform/soc/soc:mca_strategy_wireless_revchg_class/wake
 genfscon sysfs /devices/platform/soc/soc:mi_t1_chip/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:mi_t2_jtag/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display-primary/wakeup u:object_r:sysfs_wakeup:s0
+
+# Pudding touch wake-source statistics use the standard suspend-readable type.
+genfscon sysfs /devices/platform/synaptics_tcm.0/wakeup u:object_r:sysfs_wakeup:s0
+
+# Camera reads UFS write-booster buffer availability.
+genfscon sysfs /devices/platform/soc/1d84000.ufshc/attributes/wb_avail_buf u:object_r:vendor_sysfs_ufs_wb_stats:s0
+
+# Exact stock SSR dump-control nodes; do not grant writes to generic sysfs.
+genfscon sysfs /devices/platform/soc/a3380000.remoteproc-soccp/remoteproc/remoteproc0/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0
+genfscon sysfs /devices/platform/soc/3000000.remoteproc-adsp/remoteproc/remoteproc1/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0
+genfscon sysfs /devices/platform/soc/4080000.remoteproc-mss/remoteproc/remoteproc2/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0
+genfscon sysfs /devices/platform/soc/32300000.remoteproc-cdsp/remoteproc/remoteproc3/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0

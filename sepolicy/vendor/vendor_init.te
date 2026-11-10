@@ -1,0 +1,36 @@
+
+# Existing boot configuration properties: read only, no broad default_prop access.
+get_prop(vendor_init, debugfs_restriction_prop)
+
+set_prop(vendor_init, vendor_pudding_wifi_aware_capability_prop)
+
+# Factory module loader resolves block-device names for DLKM mounts; no block data access.
+allow vendor_modprobe block_device:dir { getattr search };
+
+# Hardware startup helpers; keep these rules in an existing collected policy input.
+# ST secure-element HAL consumes the NFC vendor properties.
+get_prop(hal_secure_element_default, vendor_nfc_prop)
+
+# Factory SSR setup configures only the remoteproc coredump controls.
+allow vendor_ssr_setup vendor_sysfs_remoteproc_coredump:file { getattr open read write };
+
+
+# Exact stock Bluetooth BSP diagnostic-directory permissions.
+allow hal_bluetooth_default vendor_bsp_data_log_file:dir { read write create setattr open add_name search };
+allow hal_bluetooth_default vendor_bsp_data_log_file:file { read write create setattr open };
+
+# P postboot stock policy restoration Q; Bluetooth calibration access is read-only.
+set_prop(rild, vendor_cta_prop)
+allow vendor_wcnss_service vendor_persist_bluetooth_file:dir { getattr search open read };
+allow vendor_wcnss_service vendor_persist_bluetooth_file:file { getattr open read };
+
+# AIDL Soter lazy-service client callbacks; present in the factory policy.
+binder_use(vendor_hal_soter_qti)
+
+# SoterService targets API36 and is assigned the new platform_app_36 domain.
+get_prop(platform_app_36, vendor_fp_prop)
+hal_client_domain(platform_app_36, vendor_hal_soter)
+# IFAAService runs as android.uid.system and talks to the declared AIDL HAL.
+get_prop(system_app, vendor_fp_prop)
+get_prop(system_app, vendor_payment_security_prop)
+hal_client_domain(system_app, hal_mlipay)

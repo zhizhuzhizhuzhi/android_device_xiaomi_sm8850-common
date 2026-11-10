@@ -1,0 +1,3 @@
+
+# Registration callback to the display color Binder service.
+allow servicemanager vendor_hal_display_color_default:binder call;

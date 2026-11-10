@@ -122,8 +122,8 @@
 /vendor/bin/qrtr-lookup   u:object_r:vendor_qrtr_lookup_exec:s0
 
 # Sensors
+/(vendor|system/vendor)/bin/hw/alsd    u:object_r:alsd_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.sensors-service\.xiaomi-multihal     u:object_r:hal_sensors_default_exec:s0
-/(vendor|system/vendor)/bin/sensor-notifier u:object_r:vendor_sensor_notifier_exec:s0
 
 # SLA
 /data/vendor/sla(/.*)? u:object_r:sla_data_file:s0
@@ -184,3 +184,18 @@
 /data/vendor/mac_addr(/.*)? u:object_r:vendor_mac_vendor_data_file:s0
 /data/vendor/mbnconfig(/.*)? u:object_r:vendor_firmware_data_file:s0
 /vendor/bin/nv_mac u:object_r:vendor_wcnss_service_exec:s0
+
+# AOSPA QTI AIDL power HAL: init requires its executable domain.
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power-service-qti u:object_r:hal_power_default_exec:s0
+
+# Pudding original HAL implementations use unique build output names.
+/vendor/bin/hw/pudding\.strongbox-service\.thales u:object_r:vendor_hal_keymint_strongbox_exec:s0
+/vendor/bin/hw/pudding\.weaver-service\.thales u:object_r:vendor_hal_weaver_default_exec:s0
+/vendor/bin/hw/pudding\.vibrator-service\.stock318 u:object_r:hal_vibrator_default_exec:s0
+
+/vendor/bin/pudding-misys-service    u:object_r:vendor_hal_pudding_misys_default_exec:s0
+
+/vendor/bin/pudding-misys-core-service    u:object_r:vendor_hal_pudding_misys_core_exec:s0
+
+# Factory trusted VM userspace image.
+/(odm|vendor/odm)/firmware_qtvm(/.*)?    u:object_r:vendor_vm_file:s0

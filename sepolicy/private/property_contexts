@@ -1,0 +1,29 @@
+
+# Pudding radio compatibility metadata. Read-only build properties; never grant rild default_prop.
+ro.bdsms u:object_r:build_prop:s0 exact string
+ro.carrier.name u:object_r:build_prop:s0 exact string
+ro.cit.nonrootbuild u:object_r:build_prop:s0 exact string
+ro.cust.test u:object_r:build_prop:s0 exact string
+ro.fota.oem u:object_r:build_prop:s0 exact string
+ro.mi.os.version.code u:object_r:build_prop:s0 exact string
+ro.mi.os.version.incremental u:object_r:build_prop:s0 exact string
+ro.miui.build.region u:object_r:build_prop:s0 exact string
+ro.miui.cust_variant u:object_r:build_prop:s0 exact string
+ro.miui.customized.region u:object_r:build_prop:s0 exact string
+ro.miui.ui.version.code u:object_r:build_prop:s0 exact string
+ro.product.marketname u:object_r:build_prop:s0 exact string
+ro.product.mod_device u:object_r:build_prop:s0 exact string
+ro.radio.device_type u:object_r:build_prop:s0 exact string
+ro.tiantong u:object_r:build_prop:s0 exact string
+
+# Platform audio configuration consumed by the vendor audio HAL.
+audio.sys.mute.latency.factor u:object_r:audio_config_prop:s0 exact int
+audio.sys.noisy.broadcast.delay u:object_r:audio_config_prop:s0 exact int
+audio.sys.offload.pstimeout.secs u:object_r:audio_config_prop:s0 exact int
+audio.sys.routing.latency u:object_r:audio_config_prop:s0 exact int
+
+# Read-only platform identity queried by stock audio and battery components.
+ro.miui.region u:object_r:build_prop:s0 exact string
+ro.hardware.chipname u:object_r:build_prop:s0 exact string
+# Legacy vendor boot flag shares the existing debugfs configuration owner.
+persist.dbg.keep_debugfs_mounted u:object_r:debugfs_restriction_prop:s0 exact bool

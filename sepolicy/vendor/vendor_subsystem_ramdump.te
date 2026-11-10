@@ -1,4 +1,10 @@
+# Match the Qualcomm domain declaration: present only in userdebug/eng.
 userdebug_or_eng(`
-  allow vendor_subsystem_ramdump vendor_bsp_data_log_file:dir rw_dir_perms;
-  allow vendor_subsystem_ramdump vendor_bsp_data_log_file:file create_file_perms;
+
+# Read attributes of the stock BSP log root, without granting file access.
+allow vendor_subsystem_ramdump vendor_bsp_data_log_file:dir getattr;
+
+# Init grants NET_ADMIN for the stock NETLINK_KOBJECT_UEVENT listener.
+allow vendor_subsystem_ramdump self:capability net_admin;
+
 ')

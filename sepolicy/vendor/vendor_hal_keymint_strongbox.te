@@ -1,0 +1,2 @@
+# Factory Thales bootstrap waits for sys.boot_completed before serving shared-secret parameters.
+get_prop(vendor_hal_keymint_strongbox, boot_status_prop)
